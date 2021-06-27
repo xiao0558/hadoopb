@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 源文件
 touch /tmp/1.txt
 echo zhangsan zhangsan>>/tmp/1.txt
