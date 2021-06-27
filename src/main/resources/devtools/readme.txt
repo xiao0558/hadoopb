@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 源文件
 touch /tmp/1.txt
 echo zhangsan zhangsan>>/tmp/1.txt
@@ -23,5 +24,3 @@ http://hadoop76:9870/explorer.html
 
 查看任务和日志
 http://hadoop77:8088/cluster
-
-xt111
