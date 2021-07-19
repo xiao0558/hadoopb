@@ -1,11 +1,11 @@
-package com.demo.hadoop.wordcount;
+package com.demo.hadoop.output;
 
 import java.io.IOException;
 import java.net.URISyntaxException;
 
 import org.apache.hadoop.conf.Configuration;
 import org.apache.hadoop.fs.Path;
-import org.apache.hadoop.io.IntWritable;
+import org.apache.hadoop.io.NullWritable;
 import org.apache.hadoop.io.Text;
 import org.apache.hadoop.mapreduce.Job;
 import org.apache.hadoop.mapreduce.lib.input.FileInputFormat;
@@ -27,11 +27,14 @@ public class WordCountDriver {
 		
 		// 4 设置 Mapper 输出的 kv 类型
 		job.setMapOutputKeyClass(Text.class);
-		job.setMapOutputValueClass(IntWritable.class);
+		job.setMapOutputValueClass(NullWritable.class);
 		
 		// 5 设置Reducer输出 kv 类型
 		job.setOutputKeyClass(Text.class);
-		job.setOutputValueClass(IntWritable.class);
+		job.setOutputValueClass(NullWritable.class);
+		
+		// 配置自定义输出
+		job.setOutputFormatClass(WordCountOutPutFormat.class);
 		
 		// 6 设置输入和输出路径
 		FileInputFormat.setInputPaths(job, new Path("hdfs://hadoop161:8020/hadoopb_input"));

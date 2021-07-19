@@ -1,4 +1,4 @@
-package com.demo.hadoop.wordcount;
+package com.demo.hadoop.combine;
 
 import java.io.IOException;
 import java.net.URISyntaxException;
@@ -8,6 +8,7 @@ import org.apache.hadoop.fs.Path;
 import org.apache.hadoop.io.IntWritable;
 import org.apache.hadoop.io.Text;
 import org.apache.hadoop.mapreduce.Job;
+import org.apache.hadoop.mapreduce.lib.input.CombineTextInputFormat;
 import org.apache.hadoop.mapreduce.lib.input.FileInputFormat;
 import org.apache.hadoop.mapreduce.lib.output.FileOutputFormat;
 
@@ -32,6 +33,12 @@ public class WordCountDriver {
 		// 5 设置Reducer输出 kv 类型
 		job.setOutputKeyClass(Text.class);
 		job.setOutputValueClass(IntWritable.class);
+		
+		// 设置输入处理类
+		job.setInputFormatClass(CombineTextInputFormat.class);
+		// 设置虚拟切片大小
+		// 目前文件有6个每个大小88，88*6=528，定义虚拟切片大小为200，切割出3片  
+		CombineTextInputFormat.setMaxInputSplitSize(job, 200);
 		
 		// 6 设置输入和输出路径
 		FileInputFormat.setInputPaths(job, new Path("hdfs://hadoop161:8020/hadoopb_input"));

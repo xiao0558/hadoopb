@@ -1,4 +1,4 @@
-package com.demo.hadoop.wordcount;
+package com.demo.hadoop.combine2;
 
 import java.io.IOException;
 import java.net.URISyntaxException;
@@ -32,6 +32,9 @@ public class WordCountDriver {
 		// 5 设置Reducer输出 kv 类型
 		job.setOutputKeyClass(Text.class);
 		job.setOutputValueClass(IntWritable.class);
+		
+		// 配置Combiner
+		job.setCombinerClass(WordCountCombiner.class);
 		
 		// 6 设置输入和输出路径
 		FileInputFormat.setInputPaths(job, new Path("hdfs://hadoop161:8020/hadoopb_input"));
